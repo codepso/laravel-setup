@@ -1,0 +1,27 @@
+{
+    "name": "codepso/laravel",
+    "description": "This package contains helper, classes, query builders to initialize laravel projects.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Minaya Leon",
+            "email": "minayaleon@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codepso\\Laravel\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Codepso\\Laravel\\Providers\\CatalogServiceProvider"
+            ]
+        }
+    }
+}
