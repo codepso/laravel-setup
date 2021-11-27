@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Codepso\\Laravel\\Providers\\CatalogServiceProvider"
+                "Codepso\\Laravel\\Providers\\CodepsoServiceProvider"
             ]
         }
     }

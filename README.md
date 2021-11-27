@@ -13,7 +13,7 @@ php artisan vendor:publish --tag=codepso-config (optional)
 composer update codepso/laravel (optional)
 ````
 
-### Installation (Docker)
+### Docker
 ```bash
 PGSLQ
 
@@ -21,6 +21,7 @@ docker run --rm -it -v $(pwd):/var/www codepso/php:8.0-cli-pgsql composer requir
 docker run --rm -it -v $(pwd):/var/www codepso/php:8.0-cli-pgsql composer update codepso/laravel
 
 MYSQL
+
 docker run --rm -it -v $(pwd):/var/www codepso/php:8.1-cli-mysql composer require codepso/laravel
 docker run --rm -it -v $(pwd):/var/www codepso/php:8.1-cli-mysql composer update codepso/laravel
 ```
