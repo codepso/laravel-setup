@@ -9,7 +9,11 @@
 ## Installation
 ```bash
 composer require codepso/laravel
+````
+```bash
 php artisan vendor:publish --tag=codepso-config (optional)
+````
+```bash
 composer update codepso/laravel (optional)
 ````
 

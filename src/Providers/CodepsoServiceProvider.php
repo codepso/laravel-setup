@@ -4,6 +4,7 @@ namespace Codepso\Laravel\Providers;
 
 use Codepso\Laravel\Middleware\RequestToSnakeCase;
 use Codepso\Laravel\Middleware\ResponseToCamelCase;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -12,10 +13,14 @@ class CodepsoServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         // Middleware
-        $router->middlewareGroup('api', [
+        /*$router->middlewareGroup('api', [
             RequestToSnakeCase::class,
             ResponseToCamelCase::class,
-        ]);
+        ]);*/
+
+        // $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('api', RequestToSnakeCase::class);
+        $router->pushMiddlewareToGroup('api', ResponseToCamelCase::class);
 
         // Publish
         $this->publishes([
