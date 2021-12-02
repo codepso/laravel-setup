@@ -10,7 +10,10 @@ use Illuminate\Routing\Router;
 
 class CodepsoServiceProvider extends ServiceProvider
 {
-    public function boot(Router $router)
+    /**
+     * @throws BindingResolutionException
+     */
+    public function boot()
     {
         // Middleware
         /*$router->middlewareGroup('api', [
@@ -18,7 +21,7 @@ class CodepsoServiceProvider extends ServiceProvider
             ResponseToCamelCase::class,
         ]);*/
 
-        // $router = $this->app->make(Router::class);
+        $router = $this->app->make(Router::class);
         $router->pushMiddlewareToGroup('api', RequestToSnakeCase::class);
         $router->pushMiddlewareToGroup('api', ResponseToCamelCase::class);
 
