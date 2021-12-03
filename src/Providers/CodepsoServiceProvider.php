@@ -13,6 +13,13 @@ class CodepsoServiceProvider extends ServiceProvider
     /**
      * @throws BindingResolutionException
      */
+    public function register()
+    {
+        $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('api', RequestToSnakeCase::class);
+        $router->pushMiddlewareToGroup('api', ResponseToCamelCase::class);
+    }
+
     public function boot()
     {
         // Middleware
@@ -20,10 +27,6 @@ class CodepsoServiceProvider extends ServiceProvider
             RequestToSnakeCase::class,
             ResponseToCamelCase::class,
         ]);*/
-
-        $router = $this->app->make(Router::class);
-        $router->pushMiddlewareToGroup('api', RequestToSnakeCase::class);
-        $router->pushMiddlewareToGroup('api', ResponseToCamelCase::class);
 
         // Publish
         $this->publishes([
