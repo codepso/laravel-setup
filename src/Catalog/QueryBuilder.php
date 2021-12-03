@@ -77,7 +77,7 @@ class QueryBuilder
 
     private function getPerPage(): int
     {
-        return $this->request->query('size', config('codepso.catalog.size', Config::CATALOG_SIZE));
+        return $this->request->query('size', config('codepso.catalog.size', Config::CATALOG_SIZE) ?? Config::CATALOG_SIZE);
     }
 
     private function getNested(): bool
