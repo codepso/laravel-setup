@@ -15,7 +15,8 @@
     "autoload": {
         "psr-4": {
             "Codepso\\Laravel\\": "src"
-        }
+        },
+        "files": ["src/Helpers/helpers.php"]
     },
     "extra": {
         "laravel": {
