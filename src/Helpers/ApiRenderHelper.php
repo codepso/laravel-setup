@@ -21,10 +21,10 @@ class ApiRenderHelper
         return response()->json($r, $statusCode);
     }
 
-    function success(Exception $e): JsonResponse
+    function show(Exception|string $e): array
     {
-        $r = ['message' => $e->getMessage()];
-        return response()->json($r);
+        $message = ($e instanceof Exception) ? $e->getMessage() : $e;
+        return ['message' => $message];
     }
 
     private function getStatusCode($statusCode): int
