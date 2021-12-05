@@ -2,9 +2,9 @@
 
 namespace Codepso\Laravel\Providers;
 
-use App\Http\Middleware\ValidateToken;
 use Codepso\Laravel\Middleware\RequestToSnakeCase;
 use Codepso\Laravel\Middleware\ResponseToCamelCase;
+use Codepso\Laravel\Middleware\ValidateToken;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
