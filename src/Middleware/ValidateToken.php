@@ -17,7 +17,7 @@ class ValidateToken
     public function handle(Request $request, Closure $next)
     {
         $user = $request->user();
-        if ($user === null || $user->is_active !== 1) {
+        if ($user === null || !$user->is_active) {
             return response()->json(['message' => 'User not found'], 401);
         }
         return $next($request);
