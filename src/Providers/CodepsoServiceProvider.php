@@ -17,9 +17,15 @@ class CodepsoServiceProvider extends ServiceProvider
      */
     public function boot(Kernel $kernel)
     {
+        // API
         $kernel->appendMiddlewareToGroup('api', RequestToSnakeCase::class);
         $kernel->appendMiddlewareToGroup('api', ResponseToCamelCase::class);
         $kernel->appendMiddlewareToGroup('api', ResponseToCamelCase::class);
+
+        // Web
+        $kernel->appendMiddlewareToGroup('web', RequestToSnakeCase::class);
+        $kernel->appendMiddlewareToGroup('web', ResponseToCamelCase::class);
+        $kernel->appendMiddlewareToGroup('web', ResponseToCamelCase::class);
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('validate.token', ValidateToken::class);
