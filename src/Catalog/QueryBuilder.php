@@ -46,7 +46,9 @@ class QueryBuilder
         $sort = [];
         $values = $this->request->exists('sort') ? explode(',', $this->request->query('sort')) : [];
         foreach ($values as $value) {
-            $sort[] = $this->getSortBy($value);
+            if ($value) {
+                $sort[] = $this->getSortBy($value);
+            }
         }
 
         if (empty($sort)) {
