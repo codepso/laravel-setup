@@ -134,7 +134,7 @@ class Catalog
         // Priority: request
 
         $requestFilters = $this->builder->params()->filters;
-        $filters = array_merge($requestFilters, array_diff_assoc($this->appFilters, $requestFilters));
+        $filters = array_merge($requestFilters, array_diff_key($this->appFilters, $requestFilters));
 
         foreach ($filters as $column => $value) {
             if (!is_array($value)) {
