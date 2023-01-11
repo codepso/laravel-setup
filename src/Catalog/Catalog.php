@@ -12,14 +12,19 @@ class Catalog
     public Builder $q;
     public QueryBuilder $builder;
     public array $customFilters;
-    public array $appFilters;
+    public Filter $filter;
 
     function __construct(Builder $q = null)
     {
         // app(ClassName::class) returns the service container instance
         $this->builder = app(QueryBuilder::class);
         $this->customFilters = [];
-        $this->appFilters = [];
+
+        // Filters
+        $this->filter = app(Filter::class);
+        $this->filter->custom = [];
+        $this->filter->init = [];
+
         $this->q = $q;
     }
 
@@ -41,7 +46,9 @@ class Catalog
         if (!empty($q)) {
             $this->q = $q;
         }
-        $this->builder->init($this->customFilters);
+
+        $customfilters = count($this->customFilters) > 0 ? $this->customFilters : $this->filter->custom;
+        $this->builder->init($customfilters);
         return $this;
     }
 
@@ -134,7 +141,7 @@ class Catalog
         // Priority: request
 
         $requestFilters = $this->builder->params()->filters;
-        $filters = array_merge($requestFilters, array_diff_key($this->appFilters, $requestFilters));
+        $filters = array_merge($requestFilters, array_diff_key($this->filter->init, $requestFilters));
 
         foreach ($filters as $column => $value) {
             if (!is_array($value)) {
