@@ -12,7 +12,7 @@ class Catalog
     public Builder $q;
     public QueryBuilder $builder;
     public array $customFilters;
-    public Filter $filter;
+    public Filters $filters;
 
     function __construct(Builder $q = null)
     {
@@ -21,9 +21,9 @@ class Catalog
         $this->customFilters = [];
 
         // Filters
-        $this->filter = app(Filter::class);
-        $this->filter->custom = [];
-        $this->filter->init = [];
+        $this->filters = app(Filters::class);
+        $this->filters->custom = [];
+        $this->filters->init = [];
 
         $this->q = $q;
     }
@@ -47,7 +47,7 @@ class Catalog
             $this->q = $q;
         }
 
-        $customfilters = count($this->customFilters) > 0 ? $this->customFilters : $this->filter->custom;
+        $customfilters = count($this->customFilters) > 0 ? $this->customFilters : $this->filters->custom;
         $this->builder->init($customfilters);
         return $this;
     }
@@ -141,7 +141,7 @@ class Catalog
         // Priority: request
 
         $requestFilters = $this->builder->params()->filters;
-        $filters = array_merge($requestFilters, array_diff_key($this->filter->init, $requestFilters));
+        $filters = array_merge($requestFilters, array_diff_key($this->filters->init, $requestFilters));
 
         foreach ($filters as $column => $value) {
             if (!is_array($value)) {

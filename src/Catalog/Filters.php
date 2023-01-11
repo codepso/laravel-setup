@@ -2,7 +2,7 @@
 
 namespace Codepso\Laravel\Catalog;
 
-class Filter
+class Filters
 {
     public array $init;
     public array $custom;
