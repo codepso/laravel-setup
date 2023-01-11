@@ -16,7 +16,7 @@ class QueryBuilder
         $this->params = $params;
     }
 
-    private function getFilters(): array
+    public function getFilters(): array
     {
         $filters = [];
         $values = $this->request->exists('filter') ? $this->request->query('filter') : [];
@@ -29,7 +29,7 @@ class QueryBuilder
                 $parentKey = $keys[0];
                 $childKey = $keys[1];
                 $parts = explode(',', $value);
-                $filters[$parentKey][$childKey] =count($parts) > 1 ? $parts : $value;
+                $filters[$parentKey][$childKey] = count($parts) > 1 ? $parts : $value;
             }
         }
 

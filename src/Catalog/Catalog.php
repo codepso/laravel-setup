@@ -12,12 +12,14 @@ class Catalog
     public Builder $q;
     public QueryBuilder $builder;
     public array $customFilters;
+    public array $appFilters;
 
     function __construct(Builder $q = null)
     {
         // app(ClassName::class) returns the service container instance
         $this->builder = app(QueryBuilder::class);
         $this->customFilters = [];
+        $this->appFilters = [];
         $this->q = $q;
     }
 
@@ -129,7 +131,12 @@ class Catalog
      */
     function addExactFilters(): static
     {
-        foreach ($this->builder->params()->filters as $column => $value) {
+        // Priority: request
+
+        $requestFilters = $this->builder->params()->filters;
+        $filters = array_merge($requestFilters, array_diff_assoc($this->appFilters, $requestFilters));
+
+        foreach ($filters as $column => $value) {
             if (!is_array($value)) {
                 $this->q->where($column, $value);
             } else {
